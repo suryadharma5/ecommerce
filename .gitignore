@@ -1,0 +1,19 @@
+# Secrets
+.env
+.env.local
+**/application-prod.yml
+**/application-local.yml
+
+# Spring Boot build
+**/target/
+**/*.jar
+**/*.war
+
+# IDE
+.idea/
+.vscode/
+**/*.iml
+
+# OS
+.DS_Store
+Thumbs.db
