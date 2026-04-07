@@ -1,6 +1,7 @@
 package com.sdh.ecommerce.service;
 
 import com.sdh.ecommerce.client.CustomerClient;
+import com.sdh.ecommerce.client.PaymentClient;
 import com.sdh.ecommerce.client.ProductClient;
 import com.sdh.ecommerce.exception.OrderException;
 import com.sdh.ecommerce.mapper.OrderMapper;
@@ -25,6 +26,7 @@ public class OrderService {
     private final OrderMapper mapper;
     private final OrderLineService orderLineService;
     private final OrderProducer orderProducer;
+    private final PaymentClient paymentClient;
 
     public Integer create(OrderRequest request) {
         // check the customer -> openfeign
@@ -49,7 +51,16 @@ public class OrderService {
             );
         }
 
-        // TODO: start payment process
+        // start payment process
+        PaymentRequest paymentRequest = PaymentRequest.builder()
+                .amount(request.getAmount())
+                .paymentMethod(request.getPaymentMethod())
+                .orderId(order.getId())
+                .orderReference(order.getReference())
+                .customer(customer)
+                .build();
+
+        paymentClient.requestPayment(paymentRequest);
 
         // send order confirmation -> via notification svc
         OrderConfirmation orderConfirmation = OrderConfirmation.builder()
