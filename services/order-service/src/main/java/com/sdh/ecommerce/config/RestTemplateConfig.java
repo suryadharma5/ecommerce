@@ -1,4 +1,4 @@
-package com.sdh.ecommerce.client;
+package com.sdh.ecommerce.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
