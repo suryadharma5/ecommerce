@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Payment Confirmation</title>
+</head>
+<body style="margin: 0; padding: 0; font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; background-color: #f4f4f7; color: #51545e;">
+<table width="100%" cellpadding="0" cellspacing="0" role="presentation" style="background-color: #f4f4f7; padding: 20px;">
+    <tr>
+        <td align="center">
+            <table width="600" cellpadding="0" cellspacing="0" role="presentation" style="background-color: #ffffff; border-radius: 8px; overflow: hidden; box-shadow: 0 2px 4px rgba(0,0,0,0.1);">
+
+                <tr>
+                    <td style="padding: 40px; text-align: center; background-color: #000000;">
+                        <h1 style="margin: 0; color: #ffffff; font-size: 24px;">Payment Received</h1>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td style="padding: 40px;">
+                        <p style="font-size: 16px; line-height: 1.6; margin-bottom: 20px;">
+                            Hello <span th:text="${payment.customerFirstName + ' ' + payment.customerLastName}">Customer Name</span>,
+                        </p>
+                        <p style="font-size: 16px; line-height: 1.6; margin-bottom: 30px;">
+                            Thank you for your payment. We’ve successfully processed the transaction for order <strong th:text="${'#' + payment.orderReference}">#ORDER-123</strong>.
+                        </p>
+
+                        <table width="100%" cellpadding="0" cellspacing="0" role="presentation" style="background-color: #f8fafc; border-radius: 6px; padding: 20px;">
+                            <tr>
+                                <td style="padding-bottom: 10px; font-size: 14px; color: #718096;">Amount Paid</td>
+                                <td align="right" style="padding-bottom: 10px; font-size: 16px; font-weight: bold; color: #1a202c;"
+                                    th:text="${#numbers.formatCurrency(payment.amount)}">$0.00</td>
+                            </tr>
+                            <tr>
+                                <td style="padding-bottom: 10px; font-size: 14px; color: #718096;">Payment Method</td>
+                                <td align="right" style="padding-bottom: 10px; font-size: 14px; color: #1a202c;"
+                                    th:text="${payment.paymentMethod}">CREDIT_CARD</td>
+                            </tr>
+                            <tr>
+                                <td style="border-top: 1px solid #e2e8f0; padding-top: 10px; font-size: 14px; color: #718096;">Order Reference</td>
+                                <td align="right" style="border-top: 1px solid #e2e8f0; padding-top: 10px; font-size: 14px; color: #1a202c;"
+                                    th:text="${payment.orderReference}">REF-123</td>
+                            </tr>
+                        </table>
+
+                        <p style="margin-top: 30px; font-size: 16px; line-height: 1.6;">
+                            We are now preparing your order for shipment. You will receive a separate email with tracking details once it's on the way.
+                        </p>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td style="padding: 20px 40px; background-color: #f8fafc; text-align: center;">
+                        <p style="font-size: 12px; color: #a0aec0; margin: 0;">
+                            Sent to <span th:text="${payment.customerEmail}">customer@email.com</span>
+                        </p>
+                        <p style="font-size: 12px; color: #a0aec0; margin-top: 5px;">
+                            &copy; 2026 Your Company Name. All rights reserved.
+                        </p>
+                    </td>
+                </tr>
+            </table>
+        </td>
+    </tr>
+</table>
+</body>
+</html>
